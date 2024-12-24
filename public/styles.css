@@ -1,0 +1,48 @@
+body {
+    padding: 2cm 5mm 0mm 5mm;    
+}
+i{
+    position: absolute;
+    margin-left: 40px;
+    margin-top: 20px;
+    font-weight: bolder;
+}
+.horizontal {
+    text-align: right;
+}
+nav .horizontal {
+    display: inline-block;
+}
+.horizontal > * {
+    display: inline;
+}
+input[name=search] {
+    width: 200px;
+}
+.heading {
+    position: absolute;
+    margin-top: -10px;
+    background-image: url(/logo.png);
+    background-repeat: no-repeat;
+    height: 100px;
+    width: 100px;
+}
+.datetime {
+    font-size: smaller;
+    font-style: italic;
+    text-align: right;
+}
+.copyright {
+    font-style: italic;
+    text-align: right;
+    padding: 0.5cm;
+    margin-top: 100px;
+}
+
+.addendum {
+    text-align: center;
+}
+
+.addendum img {
+    max-width: 50%;
+}
