@@ -9,12 +9,23 @@
 </head>
 <body>
     <nav>
-        <a href="/" class="brand logo">
-            <div class="heading"><i>myCase</i></div>
-        </a>
+        <% if (req.user) {%>
+            <a href="/" class="brand logo">
+                <div class="heading"><i>myCase</i></div>
+            </a>
+        <% } %>
         <input id="bmenub" type="checkbox" class="show">
         <label for="bmenub" class="burger pseudo button">&#9776;</label>
         <div class="menu">
-            <a href="/add" class="button">Добавить дело</a>
+            <% if (req.user) {%>
+                <div class="horizontal user"><%= req.user.name %></div>
+                <form action="/logout" method="post" class="horizontal">
+                    <input type="submit" value="Выйти">
+                </form>
+            <% }else{ %>
+                <a href="/login/" class="button success">Вход</a>
+                <a href="/register/" class="button">Регистрация</a>
+            <% } %>
         </div>
     </nav>
+    

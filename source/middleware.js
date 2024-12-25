@@ -35,3 +35,24 @@ export function extendFlashAPI (req, res, next){
     next();
 }
 
+export function loadCurrentUser(req, res, next){
+    req.user = req.session.user;
+    next();
+}
+
+export function isGuest(req, res, next){
+    if (req.user){
+        res.redirect('/');
+    }else{
+        next();
+    }
+}
+
+export function isLoggedIn(req, res, next){
+    if(req.user){
+        next();
+    }else{
+        res.redirect('/login');
+    }
+}
+

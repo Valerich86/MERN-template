@@ -11,7 +11,7 @@ export function setOrder(req, res){
 }
 
 export function mainPage(req, res){
-    let list = getList();
+    let list = getList(req.user.id);
     if (req.cookies.doneAtLast === '1'){
         list = [...list];
         list.sort((el1, el2)=>{
@@ -49,7 +49,7 @@ export function mainPage(req, res){
 }
 
 export function detailPage(req, res){
-    const t = getItem(req.params.id);
+    const t = getItem(req.params.id, req.user.id);
     if (!t){
         throw createError(404, 'Запрошенное дело не существует');
     }
@@ -67,6 +67,7 @@ export function add(req, res){
     const todo = {
         title: req.body.title,
         desc: req.body.desc || '',
+        user: req.user.id,
         createdAt: (new Date()).toString()
     }
     if (req.file)
@@ -76,7 +77,7 @@ export function add(req, res){
 } 
 
 export function setDone(req, res){
-    if (setDoneItem(req.params.id))
+    if (setDoneItem(req.params.id, req.user.id))
         res.redirect('/');
     else
     throw createError(404, 'Запрошенное дело не существует');
@@ -84,12 +85,12 @@ export function setDone(req, res){
 
 export async function remove(req, res, next){
     try{
-        const t = getItem(req.params.id);
+        const t = getItem(req.params.id, req.user.id);
         if (!t)
             throw createError(404, 'Запрошенное дело не существует');
         if (t.addendum)
             await rm(join(currentDir, 'storage', 'uploaded', t.addendum));
-        deleteItem(t._id);
+        deleteItem(t._id, req.user.id);
         res.redirect('/');
     }catch(err){
         next(err);

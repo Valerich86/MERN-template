@@ -4,11 +4,17 @@ body {
 i{
     position: absolute;
     margin-left: 40px;
-    margin-top: 20px;
+    margin-top: 15px;
     font-weight: bolder;
 }
 .horizontal {
     text-align: right;
+}
+.center {
+    text-align: center;
+}
+.left {
+    text-align: left;
 }
 nav .horizontal {
     display: inline-block;
@@ -27,6 +33,11 @@ input[name=search] {
     height: 100px;
     width: 100px;
 }
+.user{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: italic;
+    font-size: 20px;
+}
 .datetime {
     font-size: smaller;
     font-style: italic;
@@ -35,7 +46,6 @@ input[name=search] {
 .copyright {
     font-style: italic;
     text-align: right;
-    padding: 0.5cm;
     margin-top: 100px;
 }
 

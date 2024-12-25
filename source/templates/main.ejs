@@ -1,10 +1,13 @@
 <%- include('includes/header.ejs') %>
-    <form method="get" class="horizontal">
+
+    <form method="get" class="left">
         <input name="search">
         <input type="submit" value="Найти">
     </form>
-
-    <form action="/setorder" method="post" class="horizontal">
+    <div class="left">
+        <a href="/add/" class="button">Добавить дело</a>
+    </div>
+    <form action="/setorder" method="post" class="left">
         <% if (req.cookies.doneAtLast == '1'){ %>
             <input type="hidden" name="done_at_last" value="0">
             <input type="submit" value="Вывести все дела вместе">
@@ -13,8 +16,11 @@
             <input type="submit" value="Вывести выполненные дела в конце">
         <% } %>
     </form>
-
-    <h1>Запланированные дела:</h1>
+    <% if (Object.keys(todos).length > 0){ %>
+        <h1 class="center">Вот что запланировано:</h1>
+    <% }else{ %>
+        <h1 class="center">Пока ничего не запланировано</h1>
+    <% } %>
     <% for (let t of todos){ %>
         <article class="card">
             <header>
