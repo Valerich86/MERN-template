@@ -1,8 +1,6 @@
-import {join} from "node:path";
-import {rm} from "node:fs/promises";
 import {randomBytes} from 'node:crypto';
 import { pbkdf2Promisified } from '../utility.js';
-import { addUser, getUser } from '../models/users.js';
+import { addUser, remove } from '../models/users.js';
 
 export function registerPage(req, res){
     res.render('register', {title: 'Регистрация'});
@@ -16,7 +14,7 @@ export async function register(req, res) {
         password: hash,
         salt: salt
     };
-    addUser(user);
+    await addUser(user);
     res.redirect('/login');
 }
 
@@ -52,5 +50,13 @@ export function logout(req, res, next){
         }
     });
 }
+
+export async function removeUser(req, res, next){
+    await remove(req.params.id);
+    next();
+}
+
+
+
 
 

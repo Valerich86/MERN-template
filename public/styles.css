@@ -56,3 +56,9 @@ input[name=search] {
 .addendum img {
     max-width: 50%;
 }
+
+.danger{
+    background-color: red;
+}
+
+

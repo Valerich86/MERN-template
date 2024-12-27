@@ -5,8 +5,8 @@ import cookieParser from "cookie-parser";
 import { Router, urlencoded, static as staticMiddleware } from "express";
 import methodOverride from 'method-override';
 import { mainPage, detailPage, addPage, add, setDone, remove, setOrder, 
-    addendumWrapper } from "./controllers/todos.js";
-import { register, registerPage, login, logout, loginPage } from "./controllers/users.js";
+    addendumWrapper, mostActiveUsers, removeAll} from "./controllers/todos.js";
+import { register, registerPage, login, logout, loginPage, removeUser } from "./controllers/users.js";
 import { requestToContext, handleErrors, getErrors, extendFlashAPI, 
     loadCurrentUser, isGuest, isLoggedIn } from "./middleware.js";
 import { todoV, registerV, loginV } from "./validators.js";
@@ -54,6 +54,8 @@ router.post('/login', isGuest, loginV, handleErrors, login);
 
 router.use(isLoggedIn);
 
+router.delete('/remove/:id', removeAll, removeUser, logout);
+router.get('/mostactive', mostActiveUsers);
 router.post('/logout', logout);
 router.get('/add', getErrors, addPage);
 router.post('/add', addendumWrapper, todoV, handleErrors, add);

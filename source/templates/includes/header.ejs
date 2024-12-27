@@ -20,8 +20,12 @@
             <% if (req.user) {%>
                 <div class="horizontal user"><%= req.user.name %></div>
                 <form action="/logout" method="post" class="horizontal">
-                    <input type="submit" value="Выйти">
+                    <input type="submit" value="Выйти" class="warning">
                 </form>
+                <form action="/remove/<%= req.user.id %>?_method=DELETE" method="post" class="horizontal">
+                    <input type="submit" class="danger" value="Удалить уч.запись">
+                </form>
+                <a href="/mostactive/" class="button">Кто активнее?</a>
             <% }else{ %>
                 <a href="/login/" class="button success">Вход</a>
                 <a href="/register/" class="button">Регистрация</a>
